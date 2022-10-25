@@ -1,4 +1,4 @@
-CREATE PROCEDURE GetUsersRoles 
+CREATE PROCEDURE GetUserRoles 
 	@users IdListGui readonly
 AS
 BEGIN
