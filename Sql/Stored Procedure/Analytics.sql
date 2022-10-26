@@ -1,3 +1,6 @@
+CREATE PROCEDURE Analytics 
+AS
+BEGIN
 SELECT 
 	AppObject.AppObjectCode ProcessCode, 
 	msg.Msg ProcessName,
@@ -23,3 +26,5 @@ GROUP BY
 	currentUserid, 
 	baseuser.BaseUserName
 	ORDER BY currentUserid
+END
+GO
