@@ -3,8 +3,8 @@ AS
 BEGIN
 SELECT 
 	AppObject.AppObjectCode ProcessCode, 
-	msg.Msg ProcessName,
-	currentUserid UserId, 
+	msg.Msg ProcessCaption,
+	currentUserid UserId,
 	baseuser.BaseUserName UserName,
 	SUM(DATEDIFF(HOUR, step.StartDateTime, step.EndDateTime))/Count(1) AvgTimeSpentInhours, --Returns the average time spent per user per process
 	SUM(DATEDIFF(MINUTE, step.StartDateTime, step.EndDateTime))/Count(1) AvgTimeSpentInMinutes --Returns the average time spent per user per process
