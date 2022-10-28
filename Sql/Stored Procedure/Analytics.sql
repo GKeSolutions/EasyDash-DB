@@ -1,4 +1,6 @@
 CREATE PROCEDURE [dbo].[Analytics] 
+	@StartDate DateTime
+	, @EndDate DateTime
 AS
 BEGIN
 SELECT 
@@ -6,9 +8,25 @@ SELECT
 	msg.Msg ProcessName,
 	currentUserid UserId, 
 	baseuser.BaseUserName UserName,
-	SUM(DATEDIFF(HOUR, step.StartDateTime, step.EndDateTime))/Count(1) AvgTimeSpentInhours, --Returns the average time spent per user per process
-	SUM(DATEDIFF(MINUTE, step.StartDateTime, step.EndDateTime))/Count(1) AvgTimeSpentInMinutes, --Returns the average time spent per user per process
-	SUM(DATEDIFF(MINUTE, step.StartDateTime, step.EndDateTime)) TotalTimeSpentInMinutes
+	--If the Task started after the @StartDate, use the @startdate to calculate the hours, so we don't include time spent before the report Startdate
+	--If the Task ended after the @EndDate, use the @Enddate to calculate the hours, so we don't include time spent after the report Enddate
+	SUM(DATEDIFF(
+				HOUR, 
+				Case When step.StartDateTime < @StartDate Then @StartDate Else step.StartDateTime End, 
+				Case When step.EndDateTime > @EndDate Then @EndDate Else step.EndDateTime End
+				)
+		)/Count(1) AvgTimeSpentInhours, --Returns the average time spent per user per process
+	SUM(DATEDIFF(
+				MINUTE,
+				Case When step.StartDateTime < @StartDate Then @StartDate Else step.StartDateTime End, 
+				Case When step.EndDateTime > @EndDate Then @EndDate Else step.EndDateTime End
+				)
+		)/Count(1) AvgTimeSpentInMinutes, --Returns the average time spent per user per process
+	SUM(DATEDIFF(
+				MINUTE,
+				Case When step.StartDateTime < @StartDate Then @StartDate Else step.StartDateTime End, 
+				Case When step.EndDateTime > @EndDate Then @EndDate Else step.EndDateTime End
+				)) TotalTimeSpentInMinutes
 FROM 
 	nxfwkprocessitemstep step
 	JOIN dbo.NxFWKProcessItem item ON item.ProcItemID = step.ProcItemId
@@ -21,6 +39,8 @@ WHERE
 	--AND item.procitemid = '687EA340-B661-4E6C-B965-004B158091A9'
 	AND step.StepType <> 0 -- Exclude the "Change Owner" step
 	AND DATEDIFF(MINUTE, step.StartDateTime, step.EndDateTime) > 0
+	And step.StartDateTime < @EndDate
+	And step.EndDateTime > @StartDate
 GROUP BY 
 	AppObject.AppObjectCode, 
 	msg.Msg,
