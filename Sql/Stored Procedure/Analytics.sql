@@ -8,7 +8,7 @@ SELECT
 	baseuser.BaseUserName UserName,
 	SUM(DATEDIFF(HOUR, step.StartDateTime, step.EndDateTime))/Count(1) AvgTimeSpentInhours, --Returns the average time spent per user per process
 	SUM(DATEDIFF(MINUTE, step.StartDateTime, step.EndDateTime))/Count(1) AvgTimeSpentInMinutes, --Returns the average time spent per user per process
-	SUM(DATEDIFF(HOUR, step.StartDateTime, step.EndDateTime)) TotalTimeSpentInhours
+	SUM(DATEDIFF(MINUTE, step.StartDateTime, step.EndDateTime)) TotalTimeSpentInMinutes
 FROM 
 	nxfwkprocessitemstep step
 	JOIN dbo.NxFWKProcessItem item ON item.ProcItemID = step.ProcItemId
@@ -28,4 +28,3 @@ GROUP BY
 	baseuser.BaseUserName
 	ORDER BY currentUserid
 END
-GO
