@@ -48,3 +48,4 @@ GROUP BY
 	baseuser.BaseUserName
 	ORDER BY currentUserid
 END
+
