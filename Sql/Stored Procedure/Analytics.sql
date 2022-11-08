@@ -46,6 +46,19 @@ GROUP BY
 	msg.Msg,
 	currentUserid, 
 	baseuser.BaseUserName
-	ORDER BY currentUserid
+--Return only record with Average hours higher than 0.1
+HAVING 
+	SUM(DATEDIFF(
+			HOUR, 
+			Case When step.StartDateTime < @StartDate Then @StartDate Else step.StartDateTime End, 
+			Case When step.EndDateTime > @EndDate Then @EndDate Else step.EndDateTime End
+			)
+	)/Count(1) > 0.1
+ORDER BY currentUserid, SUM(DATEDIFF(
+			HOUR, 
+			Case When step.StartDateTime < @StartDate Then @StartDate Else step.StartDateTime End, 
+			Case When step.EndDateTime > @EndDate Then @EndDate Else step.EndDateTime End
+			)
+	)/Count(1) desc
 END
 
