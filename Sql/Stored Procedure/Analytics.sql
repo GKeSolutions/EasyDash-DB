@@ -55,7 +55,7 @@ HAVING
 			)
 	)/Count(1) > 0.1
 ORDER BY currentUserid, SUM(DATEDIFF(
-			HOUR, 
+			MINUTE, 
 			Case When step.StartDateTime < @StartDate Then @StartDate Else step.StartDateTime End, 
 			Case When step.EndDateTime > @EndDate Then @EndDate Else step.EndDateTime End
 			)
