@@ -8,6 +8,6 @@ CREATE TABLE [ed].[NotificationType](
 )
 
 INSERT INTO [ed].[NotificationType] ([Code] ,[Description]) SELECT 'ActionList', 'Action List' WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationType] WHERE Code = 'ActionList');
-INSERT INTO [ed].[NotificationType] ([Code] ,[Description]) SELECT 'MissingTime', 'Missing Time' WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationType] WHERE Code = 'Missing Time');
+INSERT INTO [ed].[NotificationType] ([Code] ,[Description]) SELECT 'MissingTime', 'Missing Time' WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationType] WHERE Code = 'MissingTime');
 
 END
