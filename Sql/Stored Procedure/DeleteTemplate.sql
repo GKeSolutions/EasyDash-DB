@@ -10,6 +10,7 @@ BEGIN
 	BEGIN TRY
 		DELETE FROM [ed].[NotificationTemplate]
 		WHERE Id = @Id;
+		COMMIT;
 	END TRY
 	BEGIN CATCH
 		RAISERROR('Failed to delete template', 16, 1)

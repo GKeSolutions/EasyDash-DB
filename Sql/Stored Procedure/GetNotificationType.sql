@@ -5,5 +5,5 @@ ALTER PROCEDURE [ed].[GeNotificationType]
 AS
 BEGIN
     SET NOCOUNT ON;
-	SELECT Code, [Description] FROM ed.NotificationType;
+	SELECT Id, Code, [Description] FROM ed.NotificationType;
 END

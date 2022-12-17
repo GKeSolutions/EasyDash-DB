@@ -32,10 +32,10 @@ BEGIN
 			   , @Role
 			   , @Process
 			   , @TemplateSubject
-			   , @TemplateBody)
-		SELECT NEWID();
+			   , @TemplateBody);
+		COMMIT;
 		DECLARE @NewId INT = SCOPE_IDENTITY();
-		SELECT * FROM [ed].[NotificationTemplate] WHERE ID = @NewId
+		SELECT ID, IsActive, Description, Type, Priority, Role, Process, TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE ID = @NewId
 	END TRY
 	BEGIN CATCH
 		RAISERROR('Failed to create new template', 16, 1)

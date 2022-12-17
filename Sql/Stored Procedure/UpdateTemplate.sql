@@ -26,7 +26,8 @@ BEGIN
 			,[TemplateSubject]=@TemplateSubject
 			,[TemplateBody]=@TemplateBody
 		WHERE Id = @Id;
-		SELECT * FROM [ed].[NotificationTemplate] WHERE ID = @Id
+		SELECT * FROM [ed].[NotificationTemplate] WHERE ID = @Id;
+		COMMIT;
 	END TRY
 	BEGIN CATCH
 		RAISERROR('Failed to update template', 16, 1)

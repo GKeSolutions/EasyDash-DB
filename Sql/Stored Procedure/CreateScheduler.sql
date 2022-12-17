@@ -27,9 +27,9 @@ BEGIN
 			   , @NotifyAfterDays
 			   , @ReassignTo
 			   , @CcContact)
-		SELECT NEWID();
 		DECLARE @NewId INT = SCOPE_IDENTITY();
-		SELECT * FROM [ed].[NotificationTemplate] WHERE ID = @NewId
+		SELECT * FROM [ed].[NotificationTemplate] WHERE ID = @NewId;
+		COMMIT;
 	END TRY
 	BEGIN CATCH
 		RAISERROR('Failed to create new scheduler', 16, 1)

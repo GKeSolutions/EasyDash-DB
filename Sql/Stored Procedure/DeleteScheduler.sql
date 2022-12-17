@@ -10,6 +10,7 @@ BEGIN
 	BEGIN TRY
 		DELETE FROM [ed].[NotificationScheduler]
 		WHERE Id = @Id;
+		COMMIT;
 	END TRY
 	BEGIN CATCH
 		RAISERROR('Failed to delete Scheduler', 16, 1)
