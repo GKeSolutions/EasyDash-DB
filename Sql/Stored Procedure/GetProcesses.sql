@@ -1,7 +1,7 @@
 IF OBJECT_ID('[ed].[GetProcesses]','P') IS NULL
 	EXEC('CREATE PROCEDURE [ed].[GetProcesses] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-    ALTER PROCEDURE [dbo].[GetProcesses]
+    ALTER PROCEDURE [ed].[GetProcesses]
     AS
     BEGIN
         SET NOCOUNT ON;

@@ -1,7 +1,7 @@
 IF OBJECT_ID('[ed].[AnalyticsDrillDown]','P') IS NULL
 	EXEC('CREATE PROCEDURE [ed].[AnalyticsDrillDown] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-	ALTER PROCEDURE [dbo].[AnalyticsDrillDown] 
+	ALTER PROCEDURE [ed].[AnalyticsDrillDown] 
 		@user uniqueidentifier
 		, @processCode nvarchar
 	AS

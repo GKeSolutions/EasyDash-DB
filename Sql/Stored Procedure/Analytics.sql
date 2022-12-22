@@ -1,7 +1,7 @@
 IF OBJECT_ID('[ed].[Analytics]','P') IS NULL
 	EXEC('CREATE PROCEDURE [ed].[Analytics] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-	ALTER PROCEDURE [dbo].[Analytics] 
+	ALTER PROCEDURE [ed].[Analytics] 
 		@StartDate DateTime
 		, @EndDate DateTime
 	AS
