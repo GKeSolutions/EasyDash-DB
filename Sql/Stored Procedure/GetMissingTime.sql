@@ -43,7 +43,7 @@ FROM dbo.Timekeeper tkpr
 		AND TC.WorkDate > = @StartDate --StartDate
 		AND TC.WorkDate <= @EndDate --EndDate
 		AND (TC.IsActive IS NULL OR TC.IsActive = 1)
-WHERE Td.HireDate < @EndDate --EndDate 
+WHERE (Td.HireDate IS NULL OR Td.HireDate < @EndDate)  --EndDate 
 	AND ( Td.termdate IS NULL OR TD.TermDate > @StartDate) --StartDate
 	AND tStatus.IsAllowTime = 1
 
