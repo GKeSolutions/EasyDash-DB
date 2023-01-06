@@ -10,8 +10,8 @@ SELECT
 	BU.NxBaseUserID UserId, 
 	BU.BaseUserName UserName, 
 	tkpr.tkprindex TimekeeperIndex, 
-	SUM(WorkHrs) WorkHrs, 
-	WorkDate, 
+	SUM(Isnull(WorkHrs, 0)) WorkHrs, 
+	pDay.PeriodDate WorkDate,  
 	CASE WHEN (	CASE WHEN WC.HoursPerWeek IS NOT NULL THEN WC.HoursPerWeek
 				ELSE ISNULL(WC.HoursSunday, 0) + 
 						ISNULL(WC.HoursMonday, 0) + 
@@ -33,23 +33,24 @@ SELECT
 	ISNULL(WC.Description, 'Work Cakendar Not Set') Workcalendar,
 	u.EmailAddr EmailAddress
 FROM dbo.Timekeeper tkpr
+	JOIN dbo.PeriodNameDay pDay on 1 = 1 --joining on PeriodNameDay to get the list of days
 	JOIN Tkprstatus tStatus ON tStatus.Code = tkpr.TkprStatus
 	JOIN TkprDate td ON td.TimekeeperLkUp = tkpr.tkprindex AND GETDATE() BETWEEN td.NxStartDate AND td.NxEndDate
 	LEFT OUTER JOIN dbo.WorkCalendar WC ON td.WorkCalendar = WC.Code
 	JOIN dbo.NxUserTimekeeper UT ON UT.Timekeeper = tkpr.tkprindex AND UT.IsDefault = 1
 	JOIN dbo.NxBaseUser BU ON BU.NxBaseUserID = UT.UserID
 	JOIN NxFWKUser u ON u.NxFWKUserID = bu.NxBaseUserID
-	LEFT OUTER JOIN dbo.Timecard TC ON Tc.Timekeeper = tkpr.TkprIndex
-		AND TC.WorkDate > = @StartDate --StartDate
-		AND TC.WorkDate <= @EndDate --EndDate
+	LEFT OUTER JOIN dbo.Timecard TC ON Tc.Timekeeper = tkpr.TkprIndex and tc.WorkDate = pDay.PeriodDate
 		AND (TC.IsActive IS NULL OR TC.IsActive = 1)
 WHERE (Td.HireDate IS NULL OR Td.HireDate < @EndDate)  --EndDate 
 	AND ( Td.termdate IS NULL OR TD.TermDate > @StartDate) --StartDate
+	AND pDay.PeriodDate > = @StartDate --StartDate
+	AND pDay.PeriodDate <= @EndDate --EndDate
 	AND tStatus.IsAllowTime = 1
 
-GROUP BY BU.NxBaseUserID, BU.BaseUserName, tkpr.tkprindex, WorkDate, 
+GROUP BY BU.NxBaseUserID, BU.BaseUserName, tkpr.tkprindex, pDay.PeriodDate, 
 	WC.HoursPerWeek, WC.HoursSunday, WC.HoursMonday, WC.HoursTuesday, WC.HoursWednesday, WC.HoursThursday, WC.HoursFriday, WC.HoursSaturday, WC.Description, u.EmailAddr
 
-ORDER BY BU.NxBaseUserID, TC.WorkDate
+ORDER BY BU.NxBaseUserID, pDay.PeriodDate
 
 END
