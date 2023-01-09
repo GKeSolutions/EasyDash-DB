@@ -11,24 +11,22 @@ GO
 		BEGIN
 			IF EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND Process=@Process)
 			BEGIN
-				--hen if among these templates, there are templates for your roles, then select the highest priority(for this process and your roles)
-				If EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND Process=@Process AND Role IN (SELECT Role from ed.GetUserRoles(@UserId)))
-					SELECT TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND Process=@Process AND Role IN (SELECT Role from ed.GetUserRoles(@UserId)) AND Priority--
+				If EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND Process=@Process AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)))
+					SELECT TOP 1 TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND Process=@Process AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)) Order By Priority
 				ELSE 
 					IF EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND Process=@Process and Role Is NULL)
-						SELECT TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND Process=@Process AND Role IS NULL AND Priority
+						SELECT TOP 1 TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND Process=@Process AND Role IS NULL Order By Priority
 					ELSE SELECT TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND IsDefault=1
 			END
 			ELSE 
 				SELECT TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='ActionList' AND IsDefault=1
-			END
-		END;
+		END
 		ELSE 
 		BEGIN
 			IF(@Process='MissingTime')
 			BEGIN
-				If EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type='MissingTime' AND Role IN (SELECT Role from ed.GetUserRoles(@UserId)))
-					SELECT TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='MissingTime' AND Role IN (SELECT Role from ed.GetUserRoles(@UserId)) AND Priority
+				If EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type='MissingTime' AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)))
+					SELECT TOP 1 TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='MissingTime' AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)) Order By Priority
 				ELSE
 					SELECT TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='MissingTime' AND IsDefault=1
 			END
