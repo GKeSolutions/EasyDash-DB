@@ -1,7 +1,7 @@
-IF OBJECT_ID('[ed].[GetUserRoles]','P') IS NULL
-	EXEC('CREATE PROCEDURE [ed].[GetUserRoles] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
+IF OBJECT_ID('[ed].[GetUsersRoles]','P') IS NULL
+	EXEC('CREATE PROCEDURE [ed].[GetUsersRoles] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-	ALTER PROCEDURE [ed].[GetUserRoles]
+	ALTER PROCEDURE [ed].[GetUsersRoles]
 		@users IdListGui readonly
 	AS
 	BEGIN
