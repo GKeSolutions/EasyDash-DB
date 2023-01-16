@@ -10,6 +10,7 @@ CREATE TABLE [ed].[NotificationTemplate](
 	Process NVARCHAR(100),
 	TemplateSubject NVARCHAR(500),
 	TemplateBody NVARCHAR(MAX),
+	IsDefault BIT,
 	PRIMARY KEY (ID),
 	FOREIGN KEY (Type) REFERENCES ed.NotificationType(ID)
 )
