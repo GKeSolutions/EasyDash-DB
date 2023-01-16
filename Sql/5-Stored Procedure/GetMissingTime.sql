@@ -46,7 +46,6 @@ WHERE (Td.HireDate IS NULL OR Td.HireDate < @EndDate)  --EndDate
 	AND ( Td.termdate IS NULL OR TD.TermDate > @StartDate) --StartDate
 	AND pDay.PeriodDate > = @StartDate --StartDate
 	AND pDay.PeriodDate <= @EndDate --EndDate
-	AND pDay.PeriodDate >= td.HireDate -- Do not return days before the employee hire date
 	AND tStatus.IsAllowTime = 1
 
 GROUP BY BU.NxBaseUserID, BU.BaseUserName, tkpr.tkprindex, pDay.PeriodDate, 
