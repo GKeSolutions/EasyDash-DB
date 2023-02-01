@@ -4,7 +4,7 @@ GO
 ALTER PROCEDURE [ed].[CreateScheduledNotification] 
 	@IsActive BIT
 	, @NotificationTemplate INT
-	, @Schedule NVARCHAR(500)
+	, @Scheduler INT
 	, @NotifyAfterDays INT
 	, @ReassignTo uniqueidentifier
 	, @CcContact uniqueidentifier
