@@ -8,7 +8,7 @@ BEGIN
     SET NOCOUNT ON;
 	BEGIN TRANSACTION
 	BEGIN TRY
-		DELETE FROM [ed].[NotificationScheduler]
+		DELETE FROM [ed].[Scheduler]
 		WHERE Id = @Id;
 		COMMIT;
 	END TRY

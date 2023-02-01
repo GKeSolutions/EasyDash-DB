@@ -3,26 +3,18 @@ IF OBJECT_ID('[ed].[UpdateScheduler]','P') IS NULL
 GO
 ALTER PROCEDURE [ed].[UpdateScheduler] 
 	@Id INT
-	, @IsActive BIT
-	, @NotificationTemplate INT
-	, @Schedule NVARCHAR(500)
-	, @NotifyAfterDays INT
-	, @ReassignTo uniqueidentifier
-	, @CcContact uniqueidentifier
+	, @CronExpression NVARCHAR(200)
+	, @Description NVARCHAR(200)
 AS
 BEGIN
     SET NOCOUNT ON;
 	BEGIN TRANSACTION
 	BEGIN TRY
-		Update [ed].[NotificationScheduler]
-		SET [IsActive]=@IsActive
-			,[NotificationTemplate]=@NotificationTemplate
-			,[Schedule]=@Schedule
-			,[NotifyAfterDays]=@NotifyAfterDays
-			,[ReassignTo]=@ReassignTo
-			,[CcContact]=@CcContact
+		Update [ed].[Scheduler]
+		SET CronExpression=@CronExpression
+			,Description=@Description
 		WHERE Id = @Id;
-		SELECT * FROM [ed].[NotificationScheduler] WHERE ID = @Id;
+		SELECT * FROM [ed].[Scheduler] WHERE ID = @Id;
 		COMMIT;
 	END TRY
 	BEGIN CATCH
