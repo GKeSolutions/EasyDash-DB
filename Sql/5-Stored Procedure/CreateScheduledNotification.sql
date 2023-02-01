@@ -23,7 +23,7 @@ BEGIN
 		 VALUES
 			   (@IsActive
 			   , @NotificationTemplate
-			   , @Schedule
+			   , @Scheduler
 			   , @NotifyAfterDays
 			   , @ReassignTo
 			   , @CcContact)
