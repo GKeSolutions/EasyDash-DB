@@ -9,7 +9,7 @@ param (
     $SQLExcludePattern = $(throw "-SQLExcludePattern is required.")
 )
 <#
-	./Run-SQL.ps1 -ConnectionString "Data Source=localhost; Initial Catalog=TE_3E_SANDBOX29; Integrated Security=True" -SQLFilePath "C:\Develop\EasyDash\EasyDash-DB\Sql\" -SQLFolderSuffix "" -SQLExcludePattern "*RunOnce*"
+	./Run-SQL.ps1 -ConnectionString "Data Source=localhost; Initial Catalog=TE_3E_SANDBOX29; Integrated Security=True" -SQLFilePath "C:\Develop\ED\EasyDash-DB\Sql\" -SQLFolderSuffix "" -SQLExcludePattern "*RunOnce*"
 #>
 $FullSQLFolderPath = "$SQLFilePath\$SQLFolderSuffix";
 

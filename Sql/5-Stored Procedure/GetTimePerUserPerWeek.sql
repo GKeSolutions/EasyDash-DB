@@ -1,9 +1,10 @@
-IF OBJECT_ID('[ed].[GetUsersWithMissingTimePerWeek]','P') IS NULL
-	EXEC('CREATE PROCEDURE [ed].[GetUsersWithMissingTimePerWeek] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
+IF OBJECT_ID('[ed].[GetTimePerUserPerWeek]','P') IS NULL
+	EXEC('CREATE PROCEDURE [ed].[GetTimePerUserPerWeek] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-ALTER PROCEDURE [ed].[GetUsersWithMissingTimePerWeek]
+ALTER PROCEDURE [ed].[GetTimePerUserPerWeek]
 	@WeekStartDate DateTime
 	, @WeekEndDate DateTime
+	, @UserId uniqueidentifier
 AS
 BEGIN
 SELECT 
@@ -40,7 +41,8 @@ FROM dbo.Timekeeper tkpr
 	JOIN NxFWKUser u ON u.NxFWKUserID = bu.NxBaseUserID
 	LEFT OUTER JOIN dbo.Timecard TC ON Tc.Timekeeper = tkpr.TkprIndex and tc.WorkDate = pDay.PeriodDate
 		AND (TC.IsActive IS NULL OR TC.IsActive = 1)
-WHERE (Td.HireDate IS NULL OR Td.HireDate < @WeekEndDate)  --EndDate 
+WHERE BU.NxBaseUserID=@UserID
+	AND (Td.HireDate IS NULL OR Td.HireDate < @WeekEndDate)  --EndDate 
 	AND ( Td.termdate IS NULL OR TD.TermDate > @WeekStartDate) --StartDate
 	AND pDay.PeriodDate > = @WeekStartDate --StartDate
 	AND pDay.PeriodDate <= @WeekEndDate --EndDate
