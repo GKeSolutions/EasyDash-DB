@@ -6,12 +6,14 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT
-		[ID]
-      ,[IsActive]
-      ,[NotificationTemplate]
-      ,[Schedule]
-      ,[NotifyAfterDays]
-      ,[ReassignTo]
-      ,[CcContact]
-  FROM [ed].[NotificationScheduler]
+		NS.[ID]
+      ,NS.[IsActive]
+      ,NS.[NotificationTemplate]
+      ,NS.[Scheduler]
+      ,NS.[NotifyAfterDays]
+      ,NS.[ReassignTo]
+      ,NS.[CcContact]
+	  ,NT.[Type] As [NotificationType]
+  FROM [ed].[ScheduledNotification] NS
+  Join [ed].NotificationTemplate NT on NT.id = NS.NotificationTemplate
 END
