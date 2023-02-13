@@ -7,3 +7,7 @@ CREATE TABLE [ed].[Scheduler](
 	PRIMARY KEY (ID),
 )
 END;
+IF NOT EXISTS(SELECT 1 FROM [ed].[Scheduler] WHERE [Description]='Every minute')
+	INSERT INTO [ed].[Scheduler] VALUES ('* * * * *' ,'Every minute');
+IF NOT EXISTS(SELECT 1 FROM [ed].[Scheduler] WHERE [Description]='Every hour')
+	INSERT INTO [ed].[Scheduler] VALUES ('0 * * * * ' ,'Every hour');

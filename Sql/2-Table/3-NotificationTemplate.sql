@@ -15,3 +15,10 @@ CREATE TABLE [ed].[NotificationTemplate](
 	FOREIGN KEY (Type) REFERENCES ed.NotificationType(ID)
 )
 END;
+
+--default
+INSERT INTO [ed].[NotificationTemplate] SELECT 1 ,'default notification template- action list',(SELECT Id from ed.NotificationType WHERE Code = 'ActionList'),1,NULL,'test process','default notification template- action list - subject','Dear @UserName, The Process @ProcessName is waiting for your action since @lastAccessTime, Please finalize it ASAP',1 WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'default notification template- action list');
+-- null process
+INSERT INTO [ed].[NotificationTemplate] SELECT 1,'null process template - action list',(SELECT Id from ed.NotificationType WHERE Code = 'ActionList'),2,'6038B9CE-CF1F-4E29-A4E2-159EB7318868',NULL,'null process template - action list - subject','Dear @UserName, The Process @ProcessName is waiting for your action since @lastAccessTime, Please finalize it ASAP',0 WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'null process template - action list');
+-- null role
+INSERT INTO [ed].[NotificationTemplate] SELECT 1,'null role template - action list',(SELECT Id from ed.NotificationType WHERE Code = 'ActionList'),2,NULL,'test process','null role template - action list - subject','Dear @UserName, The Process @ProcessName is waiting for your action since @lastAccessTime, Please finalize it ASAP',0 WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'null role template - action list');
