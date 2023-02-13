@@ -1,11 +1,11 @@
 IF OBJECT_ID('[ed].[UpdateScheduler]','P') IS NULL
 	EXEC('CREATE PROCEDURE [ed].[UpdateScheduler] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-ALTER PROCEDURE [ed].[UpdateScheduler] 
+ALTER PROCEDURE [ed].[UpdateScheduledNotification] 
 	@Id INT
 	, @IsActive BIT
 	, @NotificationTemplate INT
-	, @Schedule NVARCHAR(500)
+	, @Scheduler NVARCHAR(500)
 	, @NotifyAfterDays INT
 	, @ReassignTo uniqueidentifier
 	, @CcContact uniqueidentifier

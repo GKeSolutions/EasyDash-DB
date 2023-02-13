@@ -1,0 +1,1 @@
+UPDATE NxFWKUser SET EmailAddr = 'ed_'+EmailAddr
