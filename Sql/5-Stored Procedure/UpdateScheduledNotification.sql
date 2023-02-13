@@ -14,10 +14,10 @@ BEGIN
     SET NOCOUNT ON;
 	BEGIN TRANSACTION
 	BEGIN TRY
-		Update [ed].[NotificationScheduler]
+		Update [ed].[ScheduledNotification]
 		SET [IsActive]=@IsActive
 			,[NotificationTemplate]=@NotificationTemplate
-			,[Schedule]=@Schedule
+			,[Scheduler]=@Scheduler
 			,[NotifyAfterDays]=@NotifyAfterDays
 			,[ReassignTo]=@ReassignTo
 			,[CcContact]=@CcContact
