@@ -1,5 +1,5 @@
-IF OBJECT_ID('[ed].[UpdateScheduler]','P') IS NULL
-	EXEC('CREATE PROCEDURE [ed].[UpdateScheduler] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
+IF OBJECT_ID('[ed].[UpdateScheduledNotification]','P') IS NULL
+	EXEC('CREATE PROCEDURE [ed].[UpdateScheduledNotification] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
 ALTER PROCEDURE [ed].[UpdateScheduledNotification] 
 	@Id INT
