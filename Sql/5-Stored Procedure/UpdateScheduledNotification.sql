@@ -22,7 +22,7 @@ BEGIN
 			,[ReassignTo]=@ReassignTo
 			,[CcContact]=@CcContact
 		WHERE Id = @Id;
-		SELECT * FROM [ed].[NotificationScheduler] WHERE ID = @Id;
+		SELECT * FROM [ed].[ScheduledNotification] WHERE ID = @Id;
 		COMMIT;
 	END TRY
 	BEGIN CATCH

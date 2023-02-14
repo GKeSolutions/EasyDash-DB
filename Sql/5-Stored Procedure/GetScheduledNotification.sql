@@ -1,7 +1,7 @@
-IF OBJECT_ID('[ed].[GeNotificationScheduler]','P') IS NULL
-	EXEC('CREATE PROCEDURE [ed].[GeNotificationScheduler] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
+IF OBJECT_ID('[ed].[GetScheduledNotification]','P') IS NULL
+	EXEC('CREATE PROCEDURE [ed].[GetScheduledNotification] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-ALTER PROCEDURE [ed].[GeNotificationScheduler]
+ALTER PROCEDURE [ed].[GetScheduledNotification]
 AS
 BEGIN
     SET NOCOUNT ON;
