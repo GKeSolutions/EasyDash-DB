@@ -7,7 +7,7 @@ ALTER PROCEDURE [ed].[UpdateTemplate]
 	, @Description NVARCHAR(100)
 	, @Type INT
 	, @Priority INT
-	, @Role uniqueidentifier
+	, @Role uniqueidentifier=NULL
 	, @Process NVARCHAR(100)
 	, @TemplateSubject NVARCHAR(500)
 	, @TemplateBody NVARCHAR(MAX)
