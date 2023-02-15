@@ -6,6 +6,12 @@ CREATE TABLE [ed].[NotificationHistory](
 	Cc NVARCHAR(MAX),
 	[Subject] NVARCHAR(500),
 	Content NVARCHAR(MAX),
+	EventType NVARCHAR(200),
+	IsManual BIT,
+	IsReassign BIT,
+	IsSystem BIT,
+	ReassignTo uniqueidentifier,
+	TriggeredBy NVARCHAR(200),
 	InsertDate DateTime,
 	PRIMARY KEY (ID)
 )

@@ -6,6 +6,12 @@ ALTER PROCEDURE [ed].[AddNotificationHistory]
 	, @Cc NVARCHAR(MAX)
 	, @Subject NVARCHAR(500)
 	, @Content NVARCHAR(MAX)
+	, @EventType NVARCHAR(200)
+	, @IsManual BIT = NULL
+	, @IsReassign BIT = NULL
+	, @IsSystem BIT = NULL
+	, @ReassignTo uniqueidentifier = NULL
+	, @TriggeredBy NVARCHAR(200) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -16,12 +22,24 @@ INSERT INTO [ed].[NotificationHistory]
            ,[Cc]
            ,[Subject]
            ,[Content]
+           ,[EventType]
+           ,[IsManual]
+           ,[IsReassign]
+           ,[IsSystem]
+           ,[ReassignTo]
+           ,[TriggeredBy]
            ,[InsertDate])
 		 VALUES
 			   (@To
 			   , @Cc
 			   , @Subject
 			   , @Content
+			   , @EventType
+			   , @IsManual
+			   , @IsReassign
+			   , @IsSystem
+			   , @ReassignTo
+			   , @TriggeredBy
 			   , Current_TimeStamp);
 		COMMIT;
 	END TRY
