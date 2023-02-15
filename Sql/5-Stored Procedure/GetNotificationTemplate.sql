@@ -8,6 +8,7 @@ BEGIN
 	SELECT
 		ID
 		, IsActive
+		, IsDefault
 		, [Description]
 		, [Type]
 		, [Priority]
