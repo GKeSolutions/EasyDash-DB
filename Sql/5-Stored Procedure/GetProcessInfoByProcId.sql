@@ -1,7 +1,7 @@
 IF OBJECT_ID('[ed].[GetProcessInfoByProcId]','P') IS NULL
 	EXEC('CREATE PROCEDURE [ed].[GetProcessInfoByProcId] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-    ALTER PROCEDURE [ed].[GetProcessInfoByProcId] @userId uniqueidentifier
+    ALTER PROCEDURE [ed].[GetProcessInfoByProcId] @ProcessId uniqueidentifier
     AS
     BEGIN
         SET NOCOUNT ON;
