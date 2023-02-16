@@ -1,7 +1,7 @@
-IF OBJECT_ID('[ed].[GetUsersByProcess]','P') IS NULL
-	EXEC('CREATE PROCEDURE [ed].[GetUsersByProcess] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
+IF OBJECT_ID('[ed].[GetProcessItemsByProcessCode]','P') IS NULL
+	EXEC('CREATE PROCEDURE [ed].[GetProcessItemsByProcessCode] WITH ENCRYPTION AS BEGIN SELECT NULL; END;');
 GO
-    ALTER PROCEDURE [ed].[GetUsersByProcess] @process nvarchar(200)
+    ALTER PROCEDURE [ed].[GetProcessItemsByProcessCode] @process nvarchar(200)
     AS
     BEGIN
         SET NOCOUNT ON;
