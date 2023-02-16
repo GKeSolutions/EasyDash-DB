@@ -17,7 +17,7 @@ CREATE TABLE [ed].[NotificationTemplate](
 END;
 DECLARE @ActionListId INT = (SELECT Id from ed.NotificationType WHERE Code = 'ActionList')
 DECLARE @MissingTimeId INT = (SELECT Id from ed.NotificationType WHERE Code = 'MissingTime')
---default
+--default action list
 INSERT INTO [ed].[NotificationTemplate] 
 	SELECT 
 		1 --IsActive
@@ -30,7 +30,17 @@ INSERT INTO [ed].[NotificationTemplate]
 		,'Dear @UserName, The Process @ProcessName is waiting for your action since @lastAccessTime, Please finalize it ASAP' -- TemplateBody
 		,1 -- IsDefault
 	WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'default notification template- action list');
--- null process
-INSERT INTO [ed].[NotificationTemplate] SELECT 1,'null process template - action list',@ActionListId,2,'6038B9CE-CF1F-4E29-A4E2-159EB7318868',NULL,'null process template - action list - subject','Dear @UserName, The Process @ProcessName is waiting for your action since @lastAccessTime, Please finalize it ASAP',0 WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'null process template - action list');
--- null role
-INSERT INTO [ed].[NotificationTemplate] SELECT 1,'null role template - action list',@ActionListId,3,NULL,'test process','null role template - action list - subject','Dear @UserName, The Process @ProcessName is waiting for your action since @lastAccessTime, Please finalize it ASAP',0 WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'null role template - action list');
+
+--default missing time
+INSERT INTO [ed].[NotificationTemplate] 
+	SELECT 
+		1 --IsActive
+		,'default notification template- missing time' -- Description
+		,@MissingTimeId -- Type
+		,1 --Priority
+		,NULL -- Role
+		,NULL -- Process
+		,'default notification template- missing time - subject' -- TemplateSubject
+		,'Dear @UserName, You logged @LoggedHours hours the week of @WeekName. You''re missing @MissingHours out of @RequiredHours.' -- TemplateBody
+		,1 -- IsDefault
+	WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'default notification template- action list');
