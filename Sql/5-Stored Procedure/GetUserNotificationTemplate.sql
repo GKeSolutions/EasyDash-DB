@@ -24,12 +24,12 @@ GO
 		END
 		ELSE 
 		BEGIN
-			IF(@Process='MissingTime')
+			IF(@EventType='MissingTime')
 			BEGIN
-				If EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type='MissingTime' AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)))
-					SELECT TOP 1 TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='MissingTime' AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)) Order By Priority
+				If EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type=@NotificationType AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)))
+					SELECT TOP 1 TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type=@NotificationType AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)) Order By Priority
 				ELSE
-					SELECT TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type='MissingTime' AND IsDefault=1
+					SELECT TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type=@NotificationType AND IsDefault=1
 			END
 		END
 	END
