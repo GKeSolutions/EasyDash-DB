@@ -8,7 +8,7 @@ ALTER PROCEDURE [ed].[UpdateScheduledNotification]
 	, @Scheduler NVARCHAR(500)
 	, @NotifyAfterDays INT
 	, @ReassignTo uniqueidentifier
-	, @CcContact uniqueidentifier
+	, @CcContact NVARCHAR(200)
 AS
 BEGIN
     SET NOCOUNT ON;
