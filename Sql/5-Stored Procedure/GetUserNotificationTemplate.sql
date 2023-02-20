@@ -3,12 +3,12 @@ IF OBJECT_ID('[ed].[GetUserNotificationTemplate]','P') IS NULL
 GO
 	ALTER PROCEDURE [ed].[GetUserNotificationTemplate]
 		@Process NVARCHAR(500),
-		@EventType NVARCHAR(100),
+		@EventType INT,
 		@UserId uniqueidentifier
 	AS
 	BEGIN
 		DECLARE @NotificationType INT = (SELECT Id from ed.NotificationType where Code = @EventType)
-		IF(@EventType='ActionList')
+		IF(@EventType=1)
 		BEGIN
 			IF EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type=@NotificationType AND Process=@Process)
 			BEGIN
@@ -24,7 +24,7 @@ GO
 		END
 		ELSE 
 		BEGIN
-			IF(@EventType='MissingTime')
+			IF(@EventType=2)
 			BEGIN
 				If EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type=@NotificationType AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)))
 					SELECT TOP 1 TemplateSubject, TemplateBody FROM [ed].[NotificationTemplate] WHERE Type=@NotificationType AND Role IN (SELECT RoleId from ed.GetUserRoles(@UserId)) Order By Priority

@@ -43,4 +43,4 @@ INSERT INTO [ed].[NotificationTemplate]
 		,'default notification template- missing time - subject' -- TemplateSubject
 		,'Dear @UserName, You logged @LoggedHours hours the week of @WeekName. You''re missing @MissingHours out of @RequiredHours.' -- TemplateBody
 		,1 -- IsDefault
-	WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'default notification template- action list');
+	WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'default notification template- missing time');

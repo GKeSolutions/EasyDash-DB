@@ -7,12 +7,15 @@ ALTER PROCEDURE [ed].[CreateScheduledNotification]
 	, @Scheduler INT
 	, @NotifyAfterDays INT
 	, @ReassignTo uniqueidentifier
-	, @CcContact uniqueidentifier
+	, @CcContact NVARCHAR(100)
 AS
 BEGIN
     SET NOCOUNT ON;
 	BEGIN TRANSACTION
 	BEGIN TRY
+		Declare @EventType INT, @CronExpression NVARCHAR(200);
+		SELECT @EventType = nt.[Type] FROM ed.NotificationTemplate nt WHERE Id = @NotificationTemplate;
+		SELECT @CronExpression = s.CronExpression FROM ed.Scheduler s
 		INSERT INTO [ed].[ScheduledNotification]
 				([IsActive]
 				,[NotificationTemplate]
@@ -28,7 +31,7 @@ BEGIN
 			   , @ReassignTo
 			   , @CcContact)
 		DECLARE @NewId INT = SCOPE_IDENTITY();
-		SELECT * FROM [ed].[ScheduledNotification] WHERE ID = @NewId;
+		SELECT ID, IsActive, NotificationTemplate, Scheduler, NotifyAfterDays, ReassignTo, CcContact, @EventType EventType, @CronExpression CronExpression FROM [ed].[ScheduledNotification] WHERE ID = @NewId;
 		COMMIT;
 	END TRY
 	BEGIN CATCH
