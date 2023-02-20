@@ -7,7 +7,8 @@ GO
 		@UserId uniqueidentifier
 	AS
 	BEGIN
-		DECLARE @NotificationType INT = (SELECT Id from ed.NotificationType where Code = @EventType)
+		DECLARE @EventTypeString NVARCHAR(200) = CASE WHEN @EventType=1 THEN 'ActionList' ELSE 'MissingTime' END
+		DECLARE @NotificationType INT = (SELECT Id from ed.NotificationType where Code = @EventTypeString)
 		IF(@EventType=1)
 		BEGIN
 			IF EXISTS(SELECT 1 FROM [ed].[NotificationTemplate] WHERE Type=@NotificationType AND Process=@Process)
