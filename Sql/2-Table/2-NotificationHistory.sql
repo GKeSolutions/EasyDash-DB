@@ -11,6 +11,13 @@ CREATE TABLE [ed].[NotificationHistory](
 	IsReassign BIT,
 	IsSystem BIT,
 	ReassignTo uniqueidentifier,
+	ProcessCode NVARCHAR(200),
+	ProcessDescription NVARCHAR(200),
+	ProcItemId uniqueidentifier,
+	LastAccessTime NVARCHAR(100),
+	RequiredHours Decimal,
+	LoggedHours Decimal,
+	MissingHours Decimal,
 	TriggeredBy NVARCHAR(200),
 	InsertDate DateTime,
 	PRIMARY KEY (ID)
