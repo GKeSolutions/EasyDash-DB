@@ -11,6 +11,13 @@ ALTER PROCEDURE [ed].[AddNotificationHistory]
 	, @IsReassign BIT = NULL
 	, @IsSystem BIT = NULL
 	, @ReassignTo uniqueidentifier = NULL
+	, @ProcessCode NVARCHAR(200) = NULL
+	, @ProcessDescription NVARCHAR(200) = NULL
+	, @LastAccessTime NVARCHAR(200) = NULL
+	, @ProcItemId uniqueidentifier = NULL
+	, @LoggedHours Decimal = NULL
+	, @MissingHours Decimal = NULL
+	, @RequiredHours Decimal = NULL
 	, @TriggeredBy NVARCHAR(200) = NULL
 AS
 BEGIN
@@ -27,6 +34,13 @@ INSERT INTO [ed].[NotificationHistory]
            ,[IsReassign]
            ,[IsSystem]
            ,[ReassignTo]
+		   ,[ProcessCode]
+           ,[ProcessDescription]
+           ,[ProcItemId]
+           ,[LastAccessTime]
+           ,[RequiredHours]
+           ,[LoggedHours]
+           ,[MissingHours]
            ,[TriggeredBy]
            ,[InsertDate])
 		 VALUES
@@ -39,6 +53,13 @@ INSERT INTO [ed].[NotificationHistory]
 			   , @IsReassign
 			   , @IsSystem
 			   , @ReassignTo
+			   , @ProcessCode
+			   , @ProcessDescription
+			   , @ProcItemId
+			   , @LastAccessTime
+			   , @RequiredHours
+			   , @LoggedHours
+			   , @MissingHours
 			   , @TriggeredBy
 			   , Current_TimeStamp);
 		COMMIT;
