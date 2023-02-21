@@ -14,6 +14,9 @@ BEGIN
     SET NOCOUNT ON;
 	BEGIN TRANSACTION
 	BEGIN TRY
+		Declare @EventType INT, @CronExpression NVARCHAR(200);
+		SELECT @EventType = nt.[Type] FROM ed.NotificationTemplate nt WHERE Id = @NotificationTemplate;
+		SELECT @CronExpression = s.CronExpression FROM ed.Scheduler s
 		Update [ed].[ScheduledNotification]
 		SET [IsActive]=@IsActive
 			,[NotificationTemplate]=@NotificationTemplate
@@ -22,7 +25,7 @@ BEGIN
 			,[ReassignTo]=@ReassignTo
 			,[CcContact]=@CcContact
 		WHERE Id = @Id;
-		SELECT * FROM [ed].[ScheduledNotification] WHERE ID = @Id;
+		SELECT ID, IsActive, NotificationTemplate, Scheduler, NotifyAfterDays, ReassignTo, CcContact, @EventType EventType, @CronExpression CronExpression FROM [ed].[ScheduledNotification] WHERE ID = @Id;
 		COMMIT;
 	END TRY
 	BEGIN CATCH
