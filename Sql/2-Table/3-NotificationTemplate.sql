@@ -27,7 +27,7 @@ INSERT INTO [ed].[NotificationTemplate]
 		,NULL -- Role
 		,NULL -- Process
 		,'default notification template- action list - subject' -- TemplateSubject
-		,'Dear @UserName, The Process @ProcessName is waiting for your action since @lastAccessTime, Please finalize it ASAP' -- TemplateBody
+		,'Dear @UserName, The Process @ProcessName is waiting for your action since @LastAccessTime, Please finalize it ASAP. Process Link @ProcessLink' -- TemplateBody
 		,1 -- IsDefault
 	WHERE NOT EXISTS (SELECT 1 FROM [ed].[NotificationTemplate] WHERE Description = 'default notification template- action list');
 
