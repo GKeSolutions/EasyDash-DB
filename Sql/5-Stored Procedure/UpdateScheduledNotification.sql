@@ -16,7 +16,7 @@ BEGIN
 	BEGIN TRY
 		Declare @EventType INT, @CronExpression NVARCHAR(200);
 		SELECT @EventType = nt.[Type] FROM ed.NotificationTemplate nt WHERE Id = @NotificationTemplate;
-		SELECT @CronExpression = s.CronExpression FROM ed.Scheduler s
+		SELECT @CronExpression = s.CronExpression FROM ed.Scheduler s WHERE Id = @Scheduler
 		Update [ed].[ScheduledNotification]
 		SET [IsActive]=@IsActive
 			,[NotificationTemplate]=@NotificationTemplate
