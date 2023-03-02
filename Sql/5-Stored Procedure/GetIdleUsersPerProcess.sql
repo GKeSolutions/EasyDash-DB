@@ -11,7 +11,7 @@ GO
             bu.BaseUserName UserName,
             bu.NxBaseUserID UserId,
             ISNULL(msg.Msg, pit.[Name]) ProcessCaption,
-            pis.CreateDateTime LastUpdated,
+            pis.LastAccessTime LastUpdated,
             pis.ProcItemID ProcessItemId,
             pit.ProcCode ProcessCode,
             pit.Name ProcessDescription,
@@ -26,5 +26,5 @@ GO
         WHERE ObjectType.AppObjectTypeCode = 'Process' 
 			AND pit.ProcCode =   CASE WHEN @ProcessCode IS NULL THEN pit.ProcCode ELSE @ProcessCode END
             AND EndDateTime IS NULL
-			AND DATEDIFF(Minute, pis.CreateDateTime, GETDATE()) > @idleDays * 60  * 24 -- Convert the number of idle days to minutes
+			AND DATEDIFF(Minute, pis.LastAccessTime, GETDATE()) > @idleDays * 60  * 24 -- Convert the number of idle days to minutes
 END
