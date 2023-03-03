@@ -18,7 +18,7 @@ GO
             Distinct bu.BaseUserName UserName,
             bu.NxBaseUserID UserId,
             ISNULL(msg.Msg, pit.[Name]) ProcessCaption,
-            pis.LastAccessTime LastUpdated,
+            pis.CreateDateTime LastUpdated,
             pis.ProcItemID ProcessItemId,
             pit.ProcCode ProcessCode,
             pit.Name ProcessDescription,
