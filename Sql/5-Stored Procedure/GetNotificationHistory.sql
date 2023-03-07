@@ -8,19 +8,19 @@ BEGIN
 	IF @ActionType = 1
 		SELECT
 			'User Name' UserName
-			, InsertDate [Date]
+			, InsertDate
 			, IsReassign
 			, ReassignTo
 			, TriggeredBy
 			, ProcessDescription
-			, 'Open Since' OpenSince
+			, GETUTCDATE() OpenSince
 			, [Subject]
 			, Content
 		FROM ed.NotificationHistory
 	ELSE IF @ActionType = 2
 		SELECT
 			'User Name' UserName
-			, InsertDate [Date]
+			, InsertDate
 			, TriggeredBy
 			, RequiredHours
 			, LoggedHours
