@@ -16,7 +16,7 @@ BEGIN
 			, GETUTCDATE() OpenSince
 			, [Subject]
 			, Content
-		FROM ed.NotificationHistory
+		FROM ed.NotificationHistory WHERE EventType=1
 	ELSE IF @ActionType = 2
 		SELECT
 			'User Name' UserName
@@ -27,6 +27,6 @@ BEGIN
 			, MissingHours
 			, [Subject]
 			, Content
-		FROM ed.NotificationHistory
+		FROM ed.NotificationHistory WHERE EventType=2
 END
 GO
