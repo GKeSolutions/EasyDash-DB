@@ -23,5 +23,6 @@ GO
             LEFT OUTER JOIN dbo.nxmsg msg ON msg.MsgId = appobject.AppObjectCaptionId AND msg.LanguageIndex = 1033 -- English langauage
         WHERE ObjectType.AppObjectTypeCode = 'Process' 
             AND EndDateTime IS NULL
+            AND pit.IsComplete = 0
             AND pit.ProcCode=@process
 END

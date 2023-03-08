@@ -32,6 +32,7 @@ GO
             LEFT OUTER JOIN dbo.nxmsg msg ON msg.MsgId = appobject.AppObjectCaptionId AND msg.LanguageIndex = 1033 -- English langauage
         WHERE ObjectType.AppObjectTypeCode = 'Process' 
             AND pis.EndDateTime IS NULL
+			AND pit.IsComplete = 0
 			And pis.StartDateTime < DATEADD(Day, -@AfterDays, GetDate()) And pis.StartDateTime > DATEADD(Day, -(@AfterDays +1), GetDate()) -- Notify on on the day selected. Stop notifying the following days
 			And (@RoleId Is NUll Or bu.NxBaseUserID in (Select rl.UserId 
 														From dbo.NxRoleUser	rl

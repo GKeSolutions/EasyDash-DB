@@ -29,6 +29,7 @@ GO
         WHERE ObjectType.AppObjectTypeCode = 'Process' 
 			AND pit.ProcCode =   CASE WHEN @ProcessCode IS NULL THEN pit.ProcCode ELSE @ProcessCode END
             AND EndDateTime IS NULL
+            AND pit.IsComplete = 0
 			AND DATEDIFF(Minute, pis.CreateDateTime, GETDATE()) > @idleDays * 60  * 24 -- Convert the number of idle days to minutes
 			AND r.NxRoleID = @RoleId
 END
