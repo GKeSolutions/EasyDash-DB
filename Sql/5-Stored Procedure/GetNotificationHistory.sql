@@ -8,25 +8,27 @@ BEGIN
 	IF @ActionType = 1
 		SELECT
 			'User Name' UserName
-			, InsertDate
-			, IsReassign
-			, ReassignTo
-			, TriggeredBy
-			, ProcessDescription
-			, GETUTCDATE() OpenSince
-			, [Subject]
-			, Content
-		FROM ed.NotificationHistory WHERE EventType=1
+			, hist.InsertDate
+			, hist.IsReassign
+			, hist.ReassignTo
+			, hist.TriggeredBy
+			, hist.ProcessDescription
+			, hist.LastAccessTime OpenSince
+			, hist.[Subject]
+			, hist.Content
+		FROM ed.NotificationHistory hist 
+		WHERE EventType=1
 	ELSE IF @ActionType = 2
 		SELECT
 			'User Name' UserName
-			, InsertDate
-			, TriggeredBy
-			, RequiredHours
-			, LoggedHours
-			, MissingHours
-			, [Subject]
-			, Content
-		FROM ed.NotificationHistory WHERE EventType=2
+			, hist.InsertDate
+			, hist.TriggeredBy
+			, hist.RequiredHours
+			, hist.LoggedHours
+			, hist.MissingHours
+			, hist.[Subject]
+			, hist.Content
+		FROM ed.NotificationHistory hist
+		WHERE EventType=2
 END
 GO
