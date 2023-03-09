@@ -12,7 +12,7 @@ AS
 BEGIN
 	IF @ActionType = 1
 		SELECT
-			'User Name' UserName
+			baseUser.BaseUserName UserName
 			, hist.InsertDate
 			, hist.IsReassign
 			, hist.ReassignTo
@@ -22,10 +22,11 @@ BEGIN
 			, hist.[Subject]
 			, hist.Content
 		FROM ed.NotificationHistory hist 
+		JOIN dbo.NxBaseUser BaseUser ON baseUser.NxBaseUserID = hist.UserId
 		WHERE (@UserId IS NULL OR hist.UserId = @UserId) AND (@ProcessCode IS NULL OR hist.ProcessCode = @ProcessCode) AND (@ProcItemId IS NULL OR hist.ProcItemId = @ProcItemId) AND EventType=1 AND hist.InsertDate > @StartDate AND hist.InsertDate < @EndDate
 	ELSE IF @ActionType = 2
 		SELECT
-			'User Name' UserName
+			baseUser.BaseUserName UserName
 			, hist.InsertDate
 			, hist.TriggeredBy
 			, hist.RequiredHours
@@ -34,6 +35,7 @@ BEGIN
 			, hist.[Subject]
 			, hist.Content
 		FROM ed.NotificationHistory hist
+		JOIN dbo.NxBaseUser BaseUser ON baseUser.NxBaseUserID = hist.UserId
 		WHERE (@UserId IS NULL OR hist.UserId = @UserId) AND EventType=2 AND hist.InsertDate > @StartDate AND hist.InsertDate < @EndDate
 END
 GO
