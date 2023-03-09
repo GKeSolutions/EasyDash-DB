@@ -15,7 +15,7 @@ BEGIN
 			baseUser.BaseUserName UserName
 			, hist.InsertDate
 			, hist.IsReassign
-			, reassignUser.BaseUserName ReassignTo
+			, reassignUser.BaseUserName ReassignToStr
 			, hist.TriggeredBy
 			, hist.ProcessDescription
 			, hist.LastAccessTime OpenSince
