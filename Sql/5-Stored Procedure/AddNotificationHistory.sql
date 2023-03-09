@@ -19,6 +19,7 @@ ALTER PROCEDURE [ed].[AddNotificationHistory]
 	, @MissingHours Decimal = NULL
 	, @RequiredHours Decimal = NULL
 	, @TriggeredBy NVARCHAR(200) = NULL
+	, @UserId uniqueidentifier = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -42,7 +43,8 @@ INSERT INTO [ed].[NotificationHistory]
            ,[LoggedHours]
            ,[MissingHours]
            ,[TriggeredBy]
-           ,[InsertDate])
+           ,[InsertDate]
+		   ,[UserId])
 		 VALUES
 			   (@To
 			   , @Cc
@@ -61,7 +63,8 @@ INSERT INTO [ed].[NotificationHistory]
 			   , @LoggedHours
 			   , @MissingHours
 			   , @TriggeredBy
-			   , Current_TimeStamp);
+			   , Current_TimeStamp
+			   , @UserId);
 		COMMIT;
 	END TRY
 	BEGIN CATCH
