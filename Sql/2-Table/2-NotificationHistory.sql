@@ -20,6 +20,7 @@ CREATE TABLE [ed].[NotificationHistory](
 	MissingHours Decimal,
 	TriggeredBy NVARCHAR(200),
 	InsertDate DateTime,
+	UserId uniqueidentifier
 	PRIMARY KEY (ID)
 )
 END;
