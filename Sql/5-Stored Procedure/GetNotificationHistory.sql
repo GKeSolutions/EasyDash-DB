@@ -15,7 +15,7 @@ BEGIN
 			baseUser.BaseUserName UserName
 			, hist.InsertDate
 			, hist.IsReassign
-			, hist.ReassignTo
+			, reassignUser.BaseUserName ReassignTo
 			, hist.TriggeredBy
 			, hist.ProcessDescription
 			, hist.LastAccessTime OpenSince
@@ -23,6 +23,7 @@ BEGIN
 			, hist.Content
 		FROM ed.NotificationHistory hist 
 		JOIN dbo.NxBaseUser BaseUser ON baseUser.NxBaseUserID = hist.UserId
+		LEFT OUTER JOIN dbo.NxBaseUser reassignUser ON reassignUser.NxBaseUserId = hist.Reassignto
 		WHERE (@UserId IS NULL OR hist.UserId = @UserId) AND (@ProcessCode IS NULL OR hist.ProcessCode = @ProcessCode) AND (@ProcItemId IS NULL OR hist.ProcItemId = @ProcItemId) AND EventType=1 AND hist.InsertDate > @StartDate AND hist.InsertDate < @EndDate
 	ELSE IF @ActionType = 2
 		SELECT
