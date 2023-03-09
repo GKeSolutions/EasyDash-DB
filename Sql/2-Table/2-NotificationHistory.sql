@@ -18,7 +18,7 @@ CREATE TABLE [ed].[NotificationHistory](
 	RequiredHours Decimal,
 	LoggedHours Decimal,
 	MissingHours Decimal,
-	TriggeredBy NVARCHAR(200),
+	TriggeredBy uniqueidentifier,
 	InsertDate DateTime,
 	UserId uniqueidentifier
 	PRIMARY KEY (ID)
