@@ -13,7 +13,7 @@ BEGIN
 	IF @ActionType = 1
 		SELECT
 			baseUser.BaseUserName UserName
-			, hist.InsertDate
+			, hist.InsertDate NotificationDate
 			, hist.IsReassign
 			, reassignUser.BaseUserName ReassignToStr
 			, hist.TriggeredBy
@@ -28,7 +28,7 @@ BEGIN
 	ELSE IF @ActionType = 2
 		SELECT
 			baseUser.BaseUserName UserName
-			, hist.InsertDate
+			, hist.InsertDate NotificationDate
 			, hist.TriggeredBy
 			, hist.RequiredHours
 			, hist.LoggedHours
