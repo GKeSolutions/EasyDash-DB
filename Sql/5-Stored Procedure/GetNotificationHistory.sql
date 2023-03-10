@@ -16,7 +16,8 @@ BEGIN
 			, hist.InsertDate NotificationDate
 			, hist.IsReassign
 			, reassignUser.BaseUserName ReassignToStr
-			, triggeredByUser.BaseUserName TriggeredBy
+			, triggeredByUser.BaseUserName TriggeredByStr
+			, hist.TriggeredBy
 			, hist.ProcessDescription
 			, hist.LastAccessTime OpenSince
 			, hist.[Subject]
@@ -29,7 +30,7 @@ BEGIN
 	ELSE IF @ActionType = 2
 		SELECT
 			baseUser.BaseUserName UserName
-			, triggeredByUser.BaseUserName TriggeredBy
+			, triggeredByUser.BaseUserName TriggeredByStr
 			, hist.InsertDate NotificationDate
 			, hist.TriggeredBy
 			, hist.RequiredHours
