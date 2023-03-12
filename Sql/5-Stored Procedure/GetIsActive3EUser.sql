@@ -5,7 +5,7 @@ GO
 	@NetworkAlias NVARCHAR(64) = NULL
     AS
     BEGIN
-        Declare @IsActive3EUser INT = 0
+        Declare @IsActive3EUser BIT = 0
         
 		SELECT @IsActive3EUser = ISNULL(baseUser.IsActive, 0)
 		FROM dbo.NxFWKUser fwkUser 
