@@ -8,9 +8,10 @@ GO
         SET NOCOUNT ON;
 		SELECT Distinct
 			role.NxRoleID RoleId, 
-			role.Description RoleDecription
+			baseUser.BaseUserName RoleName
 		From nxfwkuser fwkUser 
 		Join NxRoleUser roleUser on roleUser.UserID = fwkUser.NxFWKUserID
 		Join NxRole role on role.NxRoleID = roleUser.RoleID
+		Join NxBaseUser baseUser on baseuser.NxBaseUserID = role.NxRoleId
 		Where fwkUser.NetworkAlias = @NetworkAlias
 END
