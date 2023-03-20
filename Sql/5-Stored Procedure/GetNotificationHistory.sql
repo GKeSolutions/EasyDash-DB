@@ -15,6 +15,7 @@ BEGIN
 			baseUser.BaseUserName UserName
 			, hist.InsertDate NotificationDate
 			, hist.IsReassign
+			, hist.IsCancelProcess
 			, reassignUser.BaseUserName ReassignToStr
 			, triggeredByUser.BaseUserName TriggeredByStr
 			, hist.TriggeredBy

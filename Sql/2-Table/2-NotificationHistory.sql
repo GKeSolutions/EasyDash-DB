@@ -9,6 +9,7 @@ CREATE TABLE [ed].[NotificationHistory](
 	EventType NVARCHAR(200),
 	IsManual BIT,
 	IsReassign BIT,
+	IsCancelProcess BIT,
 	IsSystem BIT,
 	ReassignTo uniqueidentifier,
 	ProcessCode NVARCHAR(200),
