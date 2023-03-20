@@ -7,6 +7,7 @@ ALTER PROCEDURE [ed].[CreateScheduledNotification]
 	, @Scheduler INT
 	, @NotifyAfterDays INT
 	, @ReassignTo uniqueidentifier
+	, @IsCancelProcess BIT
 	, @CcContact NVARCHAR(100)
 AS
 BEGIN
@@ -22,6 +23,7 @@ BEGIN
 				,[Scheduler]
 				,[NotifyAfterDays]
 				,[ReassignTo]
+				,[IsCancelProcess]
 				,[CcContact])
 		 VALUES
 			   (@IsActive
@@ -29,9 +31,10 @@ BEGIN
 			   , @Scheduler
 			   , @NotifyAfterDays
 			   , @ReassignTo
+			   , @IsCancelProcess
 			   , @CcContact)
 		DECLARE @NewId INT = SCOPE_IDENTITY();
-		SELECT ID, IsActive, NotificationTemplate, Scheduler, NotifyAfterDays, ReassignTo, CcContact, @EventType EventType, @CronExpression CronExpression FROM [ed].[ScheduledNotification] WHERE ID = @NewId;
+		SELECT ID, IsActive, NotificationTemplate, Scheduler, NotifyAfterDays, ReassignTo, IsCancelProcess, CcContact, @EventType EventType, @CronExpression CronExpression FROM [ed].[ScheduledNotification] WHERE ID = @NewId;
 		COMMIT;
 	END TRY
 	BEGIN CATCH

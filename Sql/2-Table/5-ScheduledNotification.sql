@@ -8,6 +8,7 @@ CREATE TABLE [ed].[ScheduledNotification](
 	NotifyAfterDays INT,
 	ReassignTo [uniqueidentifier],
 	CcContact NVARCHAR(200),
+	IsCancelProcess BIT DEFAULT 0,
 	PRIMARY KEY (ID),
 	FOREIGN KEY (NotificationTemplate) REFERENCES ed.NotificationTemplate(ID),
 	FOREIGN KEY (Scheduler) REFERENCES ed.Scheduler(ID)

@@ -8,6 +8,7 @@ ALTER PROCEDURE [ed].[UpdateScheduledNotification]
 	, @Scheduler NVARCHAR(500)
 	, @NotifyAfterDays INT
 	, @ReassignTo uniqueidentifier
+	, @IsCancelProcess BIT
 	, @CcContact NVARCHAR(200)
 AS
 BEGIN
@@ -23,9 +24,10 @@ BEGIN
 			,[Scheduler]=@Scheduler
 			,[NotifyAfterDays]=@NotifyAfterDays
 			,[ReassignTo]=@ReassignTo
+			,[IsCancelProcess]=@IsCancelProcess
 			,[CcContact]=@CcContact
 		WHERE Id = @Id;
-		SELECT ID, IsActive, NotificationTemplate, Scheduler, NotifyAfterDays, ReassignTo, CcContact, @EventType EventType, @CronExpression CronExpression FROM [ed].[ScheduledNotification] WHERE ID = @Id;
+		SELECT ID, IsActive, NotificationTemplate, Scheduler, NotifyAfterDays, ReassignTo, IsCancelProcess, CcContact, @EventType EventType, @CronExpression CronExpression FROM [ed].[ScheduledNotification] WHERE ID = @Id;
 		COMMIT;
 	END TRY
 	BEGIN CATCH

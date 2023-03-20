@@ -12,6 +12,7 @@ BEGIN
       ,NS.[Scheduler]
       ,NS.[NotifyAfterDays]
       ,NS.[ReassignTo]
+      ,NS.[IsCancelProcess]
       ,NS.[CcContact]
 	  ,NT.[Type] As [NotificationType]
   FROM [ed].[ScheduledNotification] NS
