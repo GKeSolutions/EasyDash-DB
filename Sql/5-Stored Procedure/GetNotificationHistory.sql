@@ -17,7 +17,7 @@ BEGIN
 			, hist.IsReassign
 			, hist.IsCancelProcess
 			, reassignUser.BaseUserName ReassignToStr
-			, triggeredByUser.BaseUserName TriggeredByStr
+			, IsNull(triggeredByUser.BaseUserName, 'System') TriggeredByStr
 			, hist.TriggeredBy
 			, hist.ProcessDescription
 			, hist.LastAccessTime OpenSince
@@ -32,7 +32,7 @@ BEGIN
 	ELSE IF @ActionType = 2
 		SELECT
 			baseUser.BaseUserName UserName
-			, triggeredByUser.BaseUserName TriggeredByStr
+			, IsNull(triggeredByUser.BaseUserName, 'System') TriggeredByStr
 			, hist.InsertDate NotificationDate
 			, hist.TriggeredBy
 			, hist.RequiredHours
