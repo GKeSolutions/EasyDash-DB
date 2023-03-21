@@ -5,7 +5,8 @@ GO
 		@SchedulerId INT
 	AS
 	BEGIN
-		SELECT s.Id, s.IsActive, n.[Type] EventType FROM ed.ScheduledNotification s
+		SELECT s.Id, s.IsActive, n.[Type] EventType, c.CronExpression FROM ed.ScheduledNotification s
 		JOIN ed.NotificationTemplate n ON n.ID=s.NotificationTemplate
+		JOIN ed.Scheduler c ON c.ID = s.Scheduler
 		WHERE Scheduler=@SchedulerId
 END
